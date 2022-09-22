@@ -20,7 +20,7 @@ export default function Header() {
 
           <Link href="/">
             <a className="text-lg md:text-xl font-bold ml-3 text-white">
-              Next.js Starter Tailwind
+            {process.env.APP_NAME}
             </a>
           </Link>
         </div>
