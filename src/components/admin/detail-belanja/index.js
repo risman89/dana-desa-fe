@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { DetailBelanjaContext } from "src/context/DetailBelanjaContext";
+import Link from "next/link";
 import moment from 'moment';
+import FormatRupiah from "src/helpers/formatRupiah";
 const Index = () => {
-    const [detailBelanja, setdetailBelanja] = useState([])
-    useEffect(() => {
-        (async () => {
-            const getData = await fetch(`http://localhost:9001/detail-belanja`);
-            const data = await getData.json();
-            setdetailBelanja(data.data);
-            }
-        )()
-    }, []);
+    const detailBelanjaState = useContext(DetailBelanjaContext); 
+   
     return (
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-            <button className="bg-blue-600 rounded-md p-1 mb-1 text-white font-bold">Tambah</button>
+            <Link href="/admin/detail_belanja/add">
+                <button className="bg-blue-600 rounded-md p-1 mb-1 text-white font-bold">Tambah</button>
+            </Link>
+            <h4 className="text-black text-1xl justify-center"> Data Detail Belanja</h4>
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -43,7 +42,7 @@ const Index = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {detailBelanja.map((item, index) => (
+                    {detailBelanjaState.detailBelanja.map((item, index) => (
                         <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={index}>
                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {index +1}
@@ -52,10 +51,10 @@ const Index = () => {
                                 {item.bidang}
                             </th>
                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {item.jumlah}
+                                {FormatRupiah(item.jumlah)}
                             </th>
                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {item.tanggal}
+                                {moment(item.tanggal).format('DD/MM/YYYY')}
                             </th>
                             <td className="py-4 px-6">
                                 {item.user_created}
@@ -67,8 +66,10 @@ const Index = () => {
                                 {item.updated_at?  moment(item.updated_at).format('DD/MM/YYYY HH:mm') : 'Belum pernah diupdate'}
                             </td>
                             <td className="py-4 px-6">
+                            <Link href={`/admin/detail_belanja/${item.id}`}>
                                 <a href="#" className="bg-indigo-700 text-white p-1 rounded-md font-bold mr-1">Edit</a>
-                                <a href="#" className="bg-red-700 text-white p-1 rounded-md font-bold">Delete</a>
+                            </Link>
+                                <a href="#" className="bg-red-700 text-white p-1 rounded-md font-bold" onClick={(e) => detailBelanjaState.handleDelete(e)} id={item.id}>Delete</a>
                             </td>
                         </tr>
                     ))}

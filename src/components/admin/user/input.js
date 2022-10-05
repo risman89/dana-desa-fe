@@ -1,4 +1,4 @@
-import {useEffect, useContext} from "react";
+import {useContext} from "react";
 import { UserContext } from "src/context/UserContext";
 import Link from 'next/link';
 const Input = () => {

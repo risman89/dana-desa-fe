@@ -9,6 +9,7 @@ const Index = () => {
             <Link href="/admin/user/add">
                 <button className="bg-blue-600 rounded-md p-1 mb-1 text-white font-bold">Tambah</button>
             </Link>
+            <h4 className="text-black text-1xl justify-center"> Data User</h4>
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>

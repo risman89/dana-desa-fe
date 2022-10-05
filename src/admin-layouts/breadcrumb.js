@@ -18,12 +18,12 @@ const Breadcrumb = () => {
         </Link>
         </li>
         <li className="mr-6">
-        <Link href="/admin/bidangBelanja">
+        <Link href="/admin/bidang_belanja">
           <a className="text-blue-500 hover:text-blue-800" href="#">Bidang Belanja</a>
         </Link>
         </li>
         <li className="mr-6">
-        <Link href="/admin/detailBelanja">
+        <Link href="/admin/detail_belanja">
           <a className="text-blue-500 hover:text-blue-800" href="#">Detail Belanja</a>
         </Link>
         </li>

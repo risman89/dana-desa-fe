@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { BidangBelanjaContext } from "src/context/BidangBelanjaContext";
+import Link from "next/link";
 import moment from 'moment';
 const Index = () => {
-    const [bidangBelanja, setbidangBelanja] = useState([])
-    useEffect(() => {
-        (async () => {
-            const getData = await fetch(`http://localhost:9001/bidang-belanja`);
-            const data = await getData.json();
-            setbidangBelanja(data.data);
-            }
-        )()
-    }, []);
+    const bidangBelanjaState = useContext(BidangBelanjaContext); 
+   
     return (
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-            <button className="bg-blue-600 rounded-md p-1 mb-1 text-white font-bold">Tambah</button>
+           <Link href="/admin/bidang_belanja/add">
+                <button className="bg-blue-600 rounded-md p-1 mb-1 text-white font-bold">Tambah</button>
+            </Link>
+            <h4 className="text-black text-1xl justify-center"> Data Bidang Belanja</h4>
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -37,7 +35,7 @@ const Index = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {bidangBelanja.map((item, index) => (
+                    {bidangBelanjaState.bidangBelanja.map((item, index) => (
                         <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={index}>
                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {index +1}
@@ -55,8 +53,10 @@ const Index = () => {
                                 {item.updated_at?  moment(item.updated_at).format('DD/MM/YYYY HH:mm') : 'Belum pernah diupdate'}
                             </td>
                             <td className="py-4 px-6">
+                            <Link href={`/admin/bidang_belanja/${item.id}`}>
                                 <a href="#" className="bg-indigo-700 text-white p-1 rounded-md font-bold mr-1">Edit</a>
-                                <a href="#" className="bg-red-700 text-white p-1 rounded-md font-bold">Delete</a>
+                            </Link>
+                                <a href="#" className="bg-red-700 text-white p-1 rounded-md font-bold" onClick={(e) => bidangBelanjaState.handleDelete(e)} id={item.id}>Delete</a>
                             </td>
                         </tr>
                     ))}

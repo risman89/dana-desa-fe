@@ -22,30 +22,6 @@ export const UserProvider = (props) => {
         )()
     }, []);
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if(userById.id){
-    //         const newData = [...user]
-    //         const NewUserByid = newData.findIndex((u => u.id == userById.id));
-    //         newData[NewUserByid].nama = values.nama == "" ? userById.nama : values.nama
-    //         newData[NewUserByid].username = values.username == "" ? userById.username : values.username
-    //         newData[NewUserByid].password = values.password == "" ? userById.password : values.password
-    //         setUser(newData);
-    //         setValues(initialValues)            
-    //         setUserById('')
-    //     }  else{       
-    //         const Data = {nama: values.nama, username: values.username, password: values.password};
-    //         const res = await fetch('http://localhost:9001/users', {
-    //             method: 'POST',
-    //             headers: {
-    //               'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(Data),
-    //           });
-    //           router.push("/admin/user")
-    //     }
-    // }   
-
     const handleInput = async (e) => {
         e.preventDefault();
         const Data = {nama: values.nama, username: values.username, password: values.password};
