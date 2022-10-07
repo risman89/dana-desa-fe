@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import { createContext, useState, useEffect } from "react";
 import {useRouter} from 'next/router'
 export const UserContext = createContext();
@@ -7,6 +8,7 @@ const initialValues = {
     password: ""
   };
 export const UserProvider = (props) => {
+    const {data: session } = useSession()
     const [values, setValues] = useState(initialValues);
     const [user, setUser] = useState([]);    
     const [userById, setUserById] = useState({});
@@ -29,6 +31,7 @@ export const UserProvider = (props) => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.user.accessToken}`,
             },
             body: JSON.stringify(Data),
           });
@@ -42,6 +45,7 @@ export const UserProvider = (props) => {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.user.accessToken}`,
             },
             body: JSON.stringify(dataEdit),
           });
@@ -54,6 +58,9 @@ export const UserProvider = (props) => {
           if (confirmDelete) {
             const res = await fetch(`http://localhost:9001/users/${id}`, {
                 method: 'DELETE',
+                headers: {  
+                  'Authorization': `Bearer ${session.user.accessToken}`,        
+                },
               });
             const newUser = await fetch(`http://localhost:9001/users`);
             const dataNew = await newUser.json();

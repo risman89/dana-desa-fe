@@ -1,3 +1,4 @@
+import { useSession, signOut } from 'next-auth/react'
 import Link from "next/link";
 import { useState } from "react";
 import cn from "classnames";
@@ -5,6 +6,8 @@ import Image from "next/image";
 
 export default function Header() {
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
+  const {data: session, loading} = useSession()
+   console.log(session);
 
   return (
     <header className="bg-green-600">
@@ -45,16 +48,15 @@ export default function Header() {
             mobileMenuIsOpen ? `block` : `hidden`
           )}
         >
-          {[
-            { title: "Home", route: "/" },
-            { title: "About", route: "/about" },
-          ].map(({ route, title }) => (
-            <li className="mt-3 md:mt-0 md:ml-6" key={title}>
-              <Link href={route}>
-                <a className="block text-white">{title}</a>
-              </Link>
+           <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+            {!loading && !session?.user.accessToken ?
+              <Link href="/login">
+              <a className="block text-white">Login</a>
+            </Link> :
+            <button onClick={() => signOut()} className="text-white font-bold">Log Out</button> 
+            }
+            
             </li>
-          ))}
         </ul>
       </div>
     </header>

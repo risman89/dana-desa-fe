@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import { createContext, useState, useEffect } from "react";
 import {useRouter} from 'next/router'
 import FormatDate from "src/helpers/formatDate";
@@ -8,6 +9,7 @@ const initialValues = {
     tanggal: ""
   };
 export const DetailBelanjaProvider = (props) => {
+    const {data: session } = useSession()
     const [values, setValues] = useState(initialValues);
     const [detailBelanja, setDetailBelanja] = useState([]);    
     const [detailBelanjaById, setDetailBelanjaById] = useState({});
@@ -36,6 +38,7 @@ export const DetailBelanjaProvider = (props) => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.user.accessToken}`, 
             },
             body: JSON.stringify(Data),
           });
@@ -50,6 +53,7 @@ export const DetailBelanjaProvider = (props) => {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.user.accessToken}`, 
             },
             body: JSON.stringify(dataEdit),
           });
@@ -62,6 +66,9 @@ export const DetailBelanjaProvider = (props) => {
           if (confirmDelete) {
             const res = await fetch(`http://localhost:9001/detail-belanja/${id}`, {
                 method: 'DELETE',
+                headers: {  
+                  'Authorization': `Bearer ${session.user.accessToken}`,        
+                },
               });
             const newData = await fetch(`http://localhost:9001/detail-belanja`);
             const dataNew = await newData.json();

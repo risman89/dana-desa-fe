@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import { createContext, useState, useEffect } from "react";
 import {useRouter} from 'next/router'
 export const BidangBelanjaContext = createContext();
@@ -5,6 +6,7 @@ const initialValues = {
     bidang: ""
   };
 export const BidangBelanjaProvider = (props) => {
+    const {data: session } = useSession()
     const [values, setValues] = useState(initialValues);
     const [bidangBelanja, setBidangBelanja] = useState([]);    
     const [bidangBelanjaById, setBidangBelanjaById] = useState({});
@@ -27,10 +29,10 @@ export const BidangBelanjaProvider = (props) => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.user.accessToken}`, 
             },
             body: JSON.stringify(Data),
           });
-          console.log(res.status);
           router.push("/admin/bidang_belanja")
     }   
 
@@ -40,7 +42,8 @@ export const BidangBelanjaProvider = (props) => {
         const res = await fetch(`http://localhost:9001/bidang-belanja/${Id}`, {
             method: 'PUT',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json',    
+              'Authorization': `Bearer ${session.user.accessToken}`,        
             },
             body: JSON.stringify(dataEdit),
           });
@@ -53,6 +56,9 @@ export const BidangBelanjaProvider = (props) => {
           if (confirmDelete) {
             const res = await fetch(`http://localhost:9001/bidang-belanja/${id}`, {
                 method: 'DELETE',
+                headers: {  
+                  'Authorization': `Bearer ${session.user.accessToken}`,        
+                },
               });
             const newData = await fetch(`http://localhost:9001/bidang-belanja`);
             const dataNew = await newData.json();

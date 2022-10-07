@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import { createContext, useState, useEffect } from "react";
 import {useRouter} from 'next/router'
 export const PendapatanContext = createContext();
@@ -6,6 +7,7 @@ const initialValues = {
     sumber: ""
   };
 export const PendapatanProvider = (props) => {
+    const {data: session } = useSession()
     const [values, setValues] = useState(initialValues);
     const [pendapatan, setPendapatan] = useState([]);    
     const [pendapatanById, setPendapatanById] = useState({});
@@ -28,10 +30,11 @@ export const PendapatanProvider = (props) => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.user.accessToken}`, 
             },
             body: JSON.stringify(Data),
           });
-          console.log(res.status);
+          // console.log(res.status);
           router.push("/admin/pendapatan")
     }   
 
@@ -42,6 +45,7 @@ export const PendapatanProvider = (props) => {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.user.accessToken}`, 
             },
             body: JSON.stringify(dataEdit),
           });
@@ -54,6 +58,9 @@ export const PendapatanProvider = (props) => {
           if (confirmDelete) {
             const res = await fetch(`http://localhost:9001/pendapatan/${id}`, {
                 method: 'DELETE',
+                headers: {  
+                  'Authorization': `Bearer ${session.user.accessToken}`,        
+                },
               });
             const newData = await fetch(`http://localhost:9001/pendapatan`);
             const dataNew = await newData.json();
