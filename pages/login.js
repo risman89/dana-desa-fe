@@ -33,9 +33,6 @@ export default function Login() {
 
     return (
         <div className="container">
-            <Head>
-                <title>NextAuth Example</title>
-            </Head>
             <main className="flex flex-col w-80 mx-auto">
                 <div className="mt-10 overflow-hidden w-full">
                     <h1 className="text-2xl text-center font-bold mb-2">Login</h1>

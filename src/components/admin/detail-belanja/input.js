@@ -20,6 +20,12 @@ const Input = () => {
                     <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="jumlah" type="text" placeholder="1000000" name="jumlah"  value={ detailBelanjaState.values.jumlah } onChange={ handleInputChange}/>
                 </div>
                 <div className="mb-4">
+                    <label className="block text-white text-sm font-bold mb-2" htmlFor="jumlah">
+                        Item Balanja
+                    </label>
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nama_item" type="text" placeholder="Item Belanja" name="nama_item"  value={ detailBelanjaState.values.nama_item } onChange={ handleInputChange}/>
+                </div>
+                <div className="mb-4">
                     <label className="block text-white text-sm font-bold mb-2" htmlFor="nama">
                         Bidang
                     </label>

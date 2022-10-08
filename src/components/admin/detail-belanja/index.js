@@ -22,6 +22,9 @@ const Index = () => {
                             Bidang
                         </th>
                         <th scope="col" className="py-3 px-6">
+                            Item
+                        </th>
+                        <th scope="col" className="py-3 px-6">
                             Jumlah
                         </th>
                         <th scope="col" className="py-3 px-6">
@@ -49,6 +52,9 @@ const Index = () => {
                             </th>
                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {item.bidang}
+                            </th>
+                            <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {item.nama_item}
                             </th>
                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {FormatRupiah(item.jumlah)}

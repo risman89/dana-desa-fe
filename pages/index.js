@@ -1,17 +1,21 @@
-import Grafik from "@components/grafik";
-import Banner from "src/components/banner";
+import Header from "src/components/header";
 import Bidang from "src/components/bidang-belanja";
 import InfoDana from "src/components/info-dana";
-
+import { PendapatanProvider } from "src/context/PendapatanContext"
+import { DetailBelanjaProvider } from "src/context/DetailBelanjaContext"
+import { BidangBelanjaProvider } from "src/context/BidangBelanjaContext"
 export default function IndexPage() {
   return (
-    <div className="bg-green-500 w-full p-10 flex-row">  
-      <div className="flex flex-row mb-5 justify-around">
-        <Banner/>
-        <Grafik/>
-      </div>
-      <InfoDana/>    
-      <Bidang/>
+    <div className="bg-gray-200 w-full p-10 flex-row">  
+      <PendapatanProvider> 
+        <DetailBelanjaProvider> 
+          <BidangBelanjaProvider>
+            <Header/>
+            <InfoDana/>              
+            <Bidang/>
+          </BidangBelanjaProvider>
+        </DetailBelanjaProvider> 
+      </PendapatanProvider>      
     </div>
   );
 }

@@ -6,8 +6,14 @@ import Image from "next/image";
 
 export default function Header() {
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
-  const {data: session, loading} = useSession()
-   console.log(session);
+  const { data: session, loading } = useSession()
+  // console.log(session);
+  const handleLogout = () =>{
+    const confirmDelete = confirm("yakin mau Log Out ?");
+    if (confirmDelete) {
+      signOut()
+    }
+}
 
   return (
     <header className="bg-green-600">
@@ -23,11 +29,10 @@ export default function Header() {
 
           <Link href="/">
             <a className="text-lg md:text-xl font-bold ml-3 text-white">
-            {process.env.APP_NAME}
-            </a>
-          </Link>
+              {process.env.APP_NAME}
+            </a>           
+          </Link>         
         </div>
-
         <button
           className="flex items-center block px-3 py-2 text-white border border-white rounded md:hidden"
           onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}
@@ -48,15 +53,49 @@ export default function Header() {
             mobileMenuIsOpen ? `block` : `hidden`
           )}
         >
-           <li className="mt-3 md:mt-0 md:ml-6 font-bold">
-            {!loading && !session?.user.accessToken ?
-              <Link href="/login">
-              <a className="block text-white">Login</a>
-            </Link> :
-            <button onClick={() => signOut()} className="text-white font-bold">Log Out</button> 
-            }
-            
-            </li>
+
+          {!loading && !session?.user.accessToken ?
+            <>
+              <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+                <Link href="/login">
+                  <a className="block text-white">Login</a>
+                </Link>
+              </li>
+            </>
+            :
+            <>
+              <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+              <Link href="/admin/">
+                <a className="block text-white">Dashboard</a>
+              </Link>
+              </li>
+              <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+              <Link href="/admin/user">
+                <a className="block text-white">User</a>
+              </Link>
+              </li>
+              <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+              <Link href="/admin/pendapatan">
+                <a className="block text-white">Pendapatan</a>
+              </Link>
+              </li>
+              <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+              <Link href="/admin/bidang_belanja">
+                <a className="block text-white">Bidang Belanja</a>
+              </Link>
+              </li>
+              <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+              <Link href="/admin/detail_belanja">
+                <a className="block text-white">Detail Belanja</a>
+              </Link>
+              </li>
+              <li className="mt-3 md:mt-0 md:ml-6 font-bold">
+                <span className='font-bold'>{session.user.nama} : </span>
+                <button onClick={() => handleLogout()} className="text-white font-bold">Log Out</button>
+              </li>
+            </>
+          }
+
         </ul>
       </div>
     </header>

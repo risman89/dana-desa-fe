@@ -6,6 +6,7 @@ export const DetailBelanjaContext = createContext();
 const initialValues = {
     id_bidang: "",
     jumlah: "",
+    nama_item: "",
     tanggal: ""
   };
 export const DetailBelanjaProvider = (props) => {
@@ -33,7 +34,7 @@ export const DetailBelanjaProvider = (props) => {
 
     const handleInput = async (e) => {
         e.preventDefault();
-        const Data = {id_bidang: values.id_bidang, jumlah: values.jumlah, tanggal: values.tanggal};
+        const Data = {id_bidang: values.id_bidang, jumlah: values.jumlah, nama_item: values.nama_item, tanggal: values.tanggal};
         const res = await fetch('http://localhost:9001/detail-belanja', {
             method: 'POST',
             headers: {
@@ -48,7 +49,7 @@ export const DetailBelanjaProvider = (props) => {
 
     const handleEdit = async (e) =>{
         e.preventDefault();
-        const dataEdit = {id_bidang: values.id_bidang, jumlah: values.jumlah, tanggal: values.tanggal};
+        const dataEdit = {id_bidang: values.id_bidang, jumlah: values.jumlah, nama_item: values.nama_item, tanggal: values.tanggal};
         const res = await fetch(`http://localhost:9001/detail-belanja/${Id}`, {
             method: 'PUT',
             headers: {
