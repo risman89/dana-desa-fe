@@ -1,5 +1,5 @@
 import { PendapatanProvider } from "src/context/PendapatanContext"
-import Edit from "@components/admin/pendapatan/Edit"
+import Edit from "@components/admin/pendapatan/edit"
 import { useRouter } from 'next/router'
 
 const EditPendapatan = () => {

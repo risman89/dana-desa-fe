@@ -1,5 +1,5 @@
 import { UserProvider } from "src/context/UserContext"
-import Edit from "@components/admin/user/Edit"
+import Edit from "@components/admin/user/edit"
 
 const EditUser = () => {
     return (
