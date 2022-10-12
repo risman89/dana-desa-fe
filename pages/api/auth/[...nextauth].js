@@ -29,7 +29,7 @@ export default NextAuth({
             password: credentials.password,
           };
   
-          const res = await fetch('http://localhost:9001/login', {
+          const res = await fetch('https://dana-desa.herokuapp.com/login', {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: {

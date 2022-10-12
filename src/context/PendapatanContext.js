@@ -16,7 +16,7 @@ export const PendapatanProvider = (props) => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch(`http://localhost:9001/pendapatan`);
+            const getData = await fetch(`https://dana-desa.herokuapp.com/pendapatan`);
             const data = await getData.json();
             setPendapatan(data.data);
             }
@@ -26,7 +26,7 @@ export const PendapatanProvider = (props) => {
     const handleInput = async (e) => {
         e.preventDefault();
         const Data = {jumlah: values.jumlah, sumber: values.sumber};
-        const res = await fetch('http://localhost:9001/pendapatan', {
+        const res = await fetch('https://dana-desa.herokuapp.com/pendapatan', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const PendapatanProvider = (props) => {
     const handleEdit = async (e) =>{
         e.preventDefault();
         const dataEdit = {jumlah: values.jumlah, sumber: values.sumber};
-        const res = await fetch(`http://localhost:9001/pendapatan/${Id}`, {
+        const res = await fetch(`https://dana-desa.herokuapp.com/pendapatan/${Id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -56,13 +56,13 @@ export const PendapatanProvider = (props) => {
           const id = e.target.id;
           const confirmDelete = confirm("yakin mau hapus ?");
           if (confirmDelete) {
-            const res = await fetch(`http://localhost:9001/pendapatan/${id}`, {
+            const res = await fetch(`https://dana-desa.herokuapp.com/pendapatan/${id}`, {
                 method: 'DELETE',
                 headers: {  
                   'Authorization': `Bearer ${session.user.accessToken}`,        
                 },
               });
-            const newData = await fetch(`http://localhost:9001/pendapatan`);
+            const newData = await fetch(`https://dana-desa.herokuapp.com/pendapatan`);
             const dataNew = await newData.json();
             setPendapatan(dataNew.data);
             router.push("/admin/pendapatan")

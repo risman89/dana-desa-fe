@@ -14,7 +14,7 @@ const Edit = () => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch('http://localhost:9001/bidang-belanja/'+id);
+            const getData = await fetch('https://dana-desa.herokuapp.com/bidang-belanja/'+id);
             const data = await getData.json();
             bidangBelanjaState.setValues({bidang: data.data.bidang})
             bidangBelanjaState.setId(id);
