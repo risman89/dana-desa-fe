@@ -8,13 +8,13 @@ export default function IndexPage() {
   return (
     <div className="bg-gray-200 w-full p-10 flex-row">  
       <PendapatanProvider> 
-        <DetailBelanjaProvider> 
-          <BidangBelanjaProvider>
+        <BidangBelanjaProvider>
+          <DetailBelanjaProvider> 
             <Header/>
             <InfoDana/>              
             <Bidang/>
-          </BidangBelanjaProvider>
-        </DetailBelanjaProvider> 
+          </DetailBelanjaProvider> 
+        </BidangBelanjaProvider>
       </PendapatanProvider>      
     </div>
   );

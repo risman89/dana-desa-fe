@@ -23,33 +23,40 @@ export default NextAuth({
         },
       },
       async authorize(credentials, req) {
-        const payload = {
-          username: credentials.username,
-          password: credentials.password,
-        };
-
-        const res = await fetch('http://localhost:9001/login', {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: {
-            'Content-Type': 'application/json',
-            tenant: credentials.tenantKey,
-            'Accept-Language': 'en-US',
-          },
-        });
-
-        const user = await res.json();
-        // console.log(user);
-        if (!res.ok) {
-          throw new Error(user.exception);
+        try {
+          const payload = {
+            username: credentials.username,
+            password: credentials.password,
+          };
+  
+          const res = await fetch('http://localhost:9001/login', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+              'Content-Type': 'application/json',
+              tenant: credentials.tenantKey,
+              'Accept-Language': 'en-US',
+            },
+          });
+  
+          const user = await res.json();
+          // console.log(user);
+          if (!res.ok) {
+            throw new Error(user.exception);
+          }
+          // If no error and we have user data, return it
+          if (res.ok && user) {
+            return user;
+          }
+  
+          // Return null if user data could not be retrieved
+          return null;
+          
+        } catch (error) {
+         // console.log(error);
+          throw new Error(error);
         }
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user;
-        }
-
-        // Return null if user data could not be retrieved
-        return null;
+      
       },
     }),
     // ...add more providers here

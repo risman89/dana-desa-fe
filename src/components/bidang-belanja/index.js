@@ -29,7 +29,7 @@ const Bidang = () => {
         <table>
           <tbody>
              {detailBelanjaState.detailBelanja.filter(detail => detail.id_bidang == item.id).map(filtereDetail => (
-              <tr>
+              <tr key={filtereDetail.id}>
                 <td className="px-2">{filtereDetail.nama_item}</td>
                 <td>:</td>
                 <td className="px-2">{FormatRupiah(filtereDetail.jumlah)}</td>

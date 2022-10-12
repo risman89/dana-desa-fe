@@ -15,20 +15,33 @@ export default function Login() {
         if (router.query.error) {
             setLoginError(router.query.error)
             setUsername(router.query.username)
+            setPassword(router.query.password)
         }
     }, [router])
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-        // console.log(username);
-        setIsLoginStarted(true)
-        signIn('credentials',
-            {
-                username,
-                password,
-                callbackUrl: `${window.location.origin}/admin/`
+    const handleLogin  = async  (e) => {
+        try {
+            e.preventDefault()
+            setIsLoginStarted(true)        
+            // console.log(isLoginStarted);
+           const  res = await  signIn('credentials',
+                {
+                    username,
+                    password,
+                    // callbackUrl: `${window.location.origin}/admin/`
+                    redirect: false
+                }
+            );
+            if(res.ok == false){
+               alert('Password / Password salah, coba lagi ..!')
+            }else{
+                router.push('/admin/')
+                // console.log("sukses");
             }
-        )
+        } catch (error) {
+            console.log(error);
+        }
+      
     }
 
     return (
@@ -47,7 +60,7 @@ export default function Login() {
                             <input id='inputPassword' type='password' value={password} onChange={(e) => setPassword(e.target.value)} className={loginError ? 'border-solid ' : 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'} placeholder="password"/>
                         </div>
                         <div className="flex items-center justify-center gap-2">
-                            <button type='submit' disabled={isLoginStarted} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Log In</button>
+                            <button type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Log In</button>
                             <Link href="/">
                                 <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                             Kembali
