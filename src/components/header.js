@@ -31,17 +31,23 @@ console.log(getTotalDetail);
           {
             label: '# of Votes',
             data: getTotalDetail,
-            backgroundColor: [
-              'red',
+            backgroundColor: [              
               'blue',
-              'purple',
               'green',
+              'yellow',
+              'purple',
+              'red',
+              'aqua',
+              'magenta'
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(255, 0, 242, 1)',
               'rgba(54, 162, 235, 1)',
               'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
+              'rgba(255, 99, 132, 1)',
+              'rgba(254, 254, 0, 1)',
+              'rgba(58, 225, 227, 1)',
             ],
             borderWidth: 1,
           },
@@ -56,7 +62,7 @@ console.log(getTotalDetail);
                 <h1 className="text-2xl">Kecamatan {process.env.KECAMATAN}</h1>        
                 <h1 className="text-2xl">Kabupaten {process.env.KAB}</h1>        
             </div>
-            <div className="w-4/12">
+            <div className="w-2/5">
             <Doughnut data={data} />
         </div>
         </div>
