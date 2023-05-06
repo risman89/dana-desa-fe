@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react'
 import { createContext, useState, useEffect } from "react";
 import {useRouter} from 'next/router'
-import FormatDate from "src/helpers/formatDate";
+// import FormatDate from "src/helpers/formatDate";
 export const DetailBelanjaContext = createContext();
 const initialValues = {
     id_bidang: "",
@@ -20,11 +20,11 @@ export const DetailBelanjaProvider = (props) => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch(`https://dana-desa.herokuapp.com/detail-belanja`);
+            const getData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/detail-belanja`);
             const data = await getData.json();
             setDetailBelanja(data.data);
 
-            const getDataBidang = await fetch(`https://dana-desa.herokuapp.com/bidang-belanja`);
+            const getDataBidang = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/bidang-belanja`);
             const dataBidang = await getDataBidang.json();
             setBidangBelanja(dataBidang.data);
 
@@ -35,7 +35,7 @@ export const DetailBelanjaProvider = (props) => {
     const handleInput = async (e) => {
         e.preventDefault();
         const Data = {id_bidang: values.id_bidang, jumlah: values.jumlah, nama_item: values.nama_item, tanggal: values.tanggal};
-        const res = await fetch('https://dana-desa.herokuapp.com/detail-belanja', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/detail-belanja`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const DetailBelanjaProvider = (props) => {
     const handleEdit = async (e) =>{
         e.preventDefault();
         const dataEdit = {id_bidang: values.id_bidang, jumlah: values.jumlah, nama_item: values.nama_item, tanggal: values.tanggal};
-        const res = await fetch(`https://dana-desa.herokuapp.com/detail-belanja/${Id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/detail-belanja/${Id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -65,13 +65,13 @@ export const DetailBelanjaProvider = (props) => {
           const id = e.target.id;
           const confirmDelete = confirm("yakin mau hapus ?");
           if (confirmDelete) {
-            const res = await fetch(`https://dana-desa.herokuapp.com/detail-belanja/${id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/detail-belanja/${id}`, {
                 method: 'DELETE',
                 headers: {  
                   'Authorization': `Bearer ${session.user.accessToken}`,        
                 },
               });
-            const newData = await fetch(`https://dana-desa.herokuapp.com/detail-belanja`);
+            const newData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/detail-belanja`);
             const dataNew = await newData.json();
             setDetailBelanja(dataNew.data);
             router.push("/admin/detail_belanja")

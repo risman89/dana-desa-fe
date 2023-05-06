@@ -2,7 +2,7 @@ import {useEffect, useContext, useState} from "react";
 import { DetailBelanjaContext } from "src/context/DetailBelanjaContext";
 import { useRouter } from 'next/router'
 import Link from 'next/link';
-import moment from 'moment';
+// import moment from 'moment';
 import FormatDate from "src/helpers/formatDate";
 const Edit = () => {
     const detailBelanjaState = useContext(DetailBelanjaContext); 
@@ -16,7 +16,7 @@ const Edit = () => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch('https://dana-desa.herokuapp.com/detail-belanja/'+id);
+            const getData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/detail-belanja/`+id);
             const data = await getData.json();
             detailBelanjaState.setValues({
                 ...detailBelanjaState.values,

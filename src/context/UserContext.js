@@ -17,7 +17,7 @@ export const UserProvider = (props) => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch(`https://dana-desa.herokuapp.com/users`);
+            const getData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/users`);
             const data = await getData.json();
             setUser(data.data);
             }
@@ -27,7 +27,7 @@ export const UserProvider = (props) => {
     const handleInput = async (e) => {
         e.preventDefault();
         const Data = {nama: values.nama, username: values.username, password: values.password};
-        const res = await fetch('https://dana-desa.herokuapp.com/users', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/users`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const UserProvider = (props) => {
     const handleEdit = async (e) =>{
         e.preventDefault();
         const dataEdit = {nama: values.nama, username: values.username};
-        const res = await fetch(`https://dana-desa.herokuapp.com/users/${Id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/users/${Id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -56,13 +56,13 @@ export const UserProvider = (props) => {
           const id = e.target.id;
           const confirmDelete = confirm("yakin mau hapus ?");
           if (confirmDelete) {
-            const res = await fetch(`https://dana-desa.herokuapp.com/users/${id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/users/${id}`, {
                 method: 'DELETE',
                 headers: {  
                   'Authorization': `Bearer ${session.user.accessToken}`,        
                 },
               });
-            const newUser = await fetch(`https://dana-desa.herokuapp.com/users`);
+            const newUser = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/users`);
             const dataNew = await newUser.json();
             setUser(dataNew.data);
             router.push("/admin/user")

@@ -14,7 +14,7 @@ const Edit = () => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch('https://dana-desa.herokuapp.com/users/'+id);
+            const getData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/users/`+id);
             const data = await getData.json();
             userState.setValues({nama: data.data.nama, username : data.data.username})
             userState.setId(id);

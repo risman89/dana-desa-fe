@@ -15,7 +15,7 @@ export const BidangBelanjaProvider = (props) => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch(`https://dana-desa.herokuapp.com/bidang-belanja`);
+            const getData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/bidang-belanja`);
             const data = await getData.json();
             setBidangBelanja(data.data);
             }
@@ -25,7 +25,7 @@ export const BidangBelanjaProvider = (props) => {
     const handleInput = async (e) => {
         e.preventDefault();
         const Data = {bidang: values.bidang};
-        const res = await fetch('https://dana-desa.herokuapp.com/bidang-belanja', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/bidang-belanja`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export const BidangBelanjaProvider = (props) => {
     const handleEdit = async (e) =>{
         e.preventDefault();
         const dataEdit = {bidang: values.bidang};
-        const res = await fetch(`https://dana-desa.herokuapp.com/bidang-belanja/${Id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/bidang-belanja/${Id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',    
@@ -54,13 +54,13 @@ export const BidangBelanjaProvider = (props) => {
           const id = e.target.id;
           const confirmDelete = confirm("yakin mau hapus ?");
           if (confirmDelete) {
-            const res = await fetch(`https://dana-desa.herokuapp.com/bidang-belanja/${id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/bidang-belanja/${id}`, {
                 method: 'DELETE',
                 headers: {  
                   'Authorization': `Bearer ${session.user.accessToken}`,        
                 },
               });
-            const newData = await fetch(`https://dana-desa.herokuapp.com/bidang-belanja`);
+            const newData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/bidang-belanja`);
             const dataNew = await newData.json();
             setBidangBelanja(dataNew.data);
             router.push("/admin/bidang_belanja")

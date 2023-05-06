@@ -11,6 +11,7 @@
   "dependencies": {
     "chart.js": "^3.9.1",
     "date-format": "^4.0.14",
+    "dotenv": "^16.0.3",
     "moment": "^2.29.4",
     "next": "12.3.0",
     "next-auth": "^4.12.3",

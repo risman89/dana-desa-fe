@@ -14,7 +14,7 @@ const Edit = () => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch('https://dana-desa.herokuapp.com/pendapatan/'+id);
+            const getData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/pendapatan/`+id);
             const data = await getData.json();
             pendapatanState.setValues({jumlah: data.data.jumlah, sumber : data.data.sumber})
             pendapatanState.setId(id);

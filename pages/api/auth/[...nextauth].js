@@ -29,7 +29,7 @@ export default NextAuth({
             password: credentials.password,
           };
   
-          const res = await fetch('https://dana-desa.herokuapp.com/login', {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/login`, {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: {

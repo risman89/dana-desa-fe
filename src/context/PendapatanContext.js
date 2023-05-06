@@ -16,7 +16,7 @@ export const PendapatanProvider = (props) => {
 
     useEffect(() => {
         (async () => {
-            const getData = await fetch(`https://dana-desa.herokuapp.com/pendapatan`);
+            const getData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/pendapatan`);
             const data = await getData.json();
             setPendapatan(data.data);
             }
@@ -26,7 +26,7 @@ export const PendapatanProvider = (props) => {
     const handleInput = async (e) => {
         e.preventDefault();
         const Data = {jumlah: values.jumlah, sumber: values.sumber};
-        const res = await fetch('https://dana-desa.herokuapp.com/pendapatan', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/pendapatan`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const PendapatanProvider = (props) => {
     const handleEdit = async (e) =>{
         e.preventDefault();
         const dataEdit = {jumlah: values.jumlah, sumber: values.sumber};
-        const res = await fetch(`https://dana-desa.herokuapp.com/pendapatan/${Id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/pendapatan/${Id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -56,13 +56,13 @@ export const PendapatanProvider = (props) => {
           const id = e.target.id;
           const confirmDelete = confirm("yakin mau hapus ?");
           if (confirmDelete) {
-            const res = await fetch(`https://dana-desa.herokuapp.com/pendapatan/${id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/pendapatan/${id}`, {
                 method: 'DELETE',
                 headers: {  
                   'Authorization': `Bearer ${session.user.accessToken}`,        
                 },
               });
-            const newData = await fetch(`https://dana-desa.herokuapp.com/pendapatan`);
+            const newData = await fetch(`${process.env.NEXT_PUBLIC_URL_SERVICE}/pendapatan`);
             const dataNew = await newData.json();
             setPendapatan(dataNew.data);
             router.push("/admin/pendapatan")
