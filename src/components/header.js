@@ -55,9 +55,9 @@ console.log(getTotalDetail);
       };
       
     return(
-        <div className="flex flex-row mb-5 justify-around">
+        <div className="flex flex-row justify-around mb-5">
             <div className="flex-row">
-                <h1 className="text-4xl">APBG {new Date().getFullYear()}</h1>
+                <h1 className="text-4xl">APBG {new Date().getFullYear() -1 }</h1>
                 <h1 className="text-4xl">{process.env.DESA}</h1>        
                 <h1 className="text-2xl">Kecamatan {process.env.KECAMATAN}</h1>        
                 <h1 className="text-2xl">Kabupaten {process.env.KAB}</h1>        
