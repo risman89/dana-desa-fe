@@ -25,21 +25,21 @@ const Edit = () => {
 
 
     return (
-        <div className="container mx-auto w-1/2">
-            <h4 className="text-black font-bold text-center text-2xl mb-2">Form Edit Pendapatan</h4>
-            <form className="bg-slate-800 shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={bidangBelanjaState.handleEdit}>
+        <div className="container w-1/2 mx-auto">
+            <h4 className="mb-2 text-2xl font-bold text-center text-black">Form Edit Bidang Belanja</h4>
+            <form className="px-8 pt-6 pb-8 mb-4 rounded shadow-md bg-slate-800" onSubmit={bidangBelanjaState.handleEdit}>
                 <div className="mb-4">
-                    <label className="block text-white text-sm font-bold mb-2" htmlFor="nama">
-                        Jumlah
+                    <label className="block mb-2 text-sm font-bold text-white" htmlFor="nama">
+                        Bidang Belanja
                     </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="bidang" type="text" placeholder="Bidang" name="bidang"  value={bidangBelanjaState.values.bidang} onChange={ handleInputChange}/>
+                    <input className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="bidang" type="text" placeholder="Bidang" name="bidang"  value={bidangBelanjaState.values.bidang} onChange={ handleInputChange}/>
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="submit">
                         Simpan
                     </button>
                     <Link href="/admin/bidang_belanja">
-                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <button className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline" type="button">
                             Kembali
                         </button>
                     </Link>
