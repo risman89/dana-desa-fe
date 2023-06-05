@@ -21,7 +21,7 @@ const Input = () => {
                 </div>
                 <div className="mb-4">
                     <label className="block mb-2 text-sm font-bold text-white" htmlFor="jumlah">
-                        Item Balanja
+                        Item Belanja
                     </label>
                     <input className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="nama_item" type="text" placeholder="Item Belanja" name="nama_item"  value={ detailBelanjaState.values.nama_item } onChange={ handleInputChange}/>
                 </div>
