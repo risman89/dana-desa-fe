@@ -15,7 +15,7 @@ const Input = () => {
             <form className="px-8 pt-6 pb-8 mb-4 rounded shadow-md bg-slate-800" onSubmit={detailBelanjaState.handleInput}>
                 <div className="mb-4">
                     <label className="block mb-2 text-sm font-bold text-white" htmlFor="jumlah">
-                        Jumlah
+                        Detail Belanja
                     </label>
                     <input className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="jumlah" type="text" placeholder="1000000" name="jumlah"  value={ detailBelanjaState.values.jumlah } onChange={ handleInputChange}/>
                 </div>
