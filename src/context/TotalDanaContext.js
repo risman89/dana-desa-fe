@@ -6,6 +6,8 @@ export const TotalDanaContext = createContext();
 export const TotalDanaProvider = (props) => {
     const [totalDanaDesa, setTotalDanaDesa] = useState();
     const [totalOthers, setTotalOthers] = useState([]);
+    const [sisaToCharts, setSisaToCharts] = useState([]);
+    const [sumberToCharts, setSumberToCharts] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -52,6 +54,11 @@ export const TotalDanaProvider = (props) => {
             });           
             setTotalOthers(finalTotalDanaOthers)
 
+            const sisaNilaiPendapatanTocharts = dataPendapatan.data.map(item => item.id === 1 ? Math.round(item.jumlah - total) : Math.round(item.jumlah * (100 - persentaseDetailOthers) / 100));
+            setSisaToCharts(sisaNilaiPendapatanTocharts)
+            const sumberPendapatanToChrats = dataPendapatan.data.map(item => item.sumber);
+            setSumberToCharts(sumberPendapatanToChrats)
+
           }
         )()
     }, []); 
@@ -59,7 +66,9 @@ export const TotalDanaProvider = (props) => {
 
     const totalDanaState = {
       totalDanaDesa,
-      totalOthers
+      totalOthers,
+      sisaToCharts,
+      sumberToCharts
     };
     return(
         <TotalDanaContext.Provider value={totalDanaState}>
