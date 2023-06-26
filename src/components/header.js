@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { BidangBelanjaContext } from "src/context/BidangBelanjaContext";
 import { DetailBelanjaContext } from "src/context/DetailBelanjaContext";
 import { TotalDanaContext } from "src/context/TotalDanaContext";
-import { faker } from '@faker-js/faker';
 
 const Header = () => {
     const bidangBelanjaState = useContext(BidangBelanjaContext); 
