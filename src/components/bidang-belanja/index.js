@@ -19,9 +19,9 @@ const Bidang = () => {
   return (
     <>
       {bidangBelanjaState.bidangBelanja.map((item, index) => (
-      <div className="bg-white text-black flex-col mb-5" key={index}>
-        <h1 className="text-3xl p-3">Bidang {item.bidang}</h1>
-        <div className="bg-black rounded-br-full p-3 text-white w-3/4">
+      <div className="flex-col mb-5 text-black bg-white" key={index}>
+        <h1 className="p-3 text-3xl">Bidang {item.bidang}</h1>
+        <div className="w-3/4 p-3 text-white bg-black rounded-br-full">
           <p className="text-base">
             {FormatRupiah(getTotalDetail(item.id))}
           </p>
