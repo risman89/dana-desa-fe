@@ -12,7 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "chart.js": "^3.9.1",
+    "chart.js": "^4.3.0",
     "date-format": "^4.0.14",
     "dotenv": "^16.0.3",
     "moment": "^2.29.4",

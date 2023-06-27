@@ -70,7 +70,7 @@ console.log(getTotalDetail);
     const colors = ['rgba(75, 192, 192, 1)', 'rgba(255, 0, 242, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(254, 254, 0, 1)', 'rgba(255, 99, 132, 1)', 'rgba(58, 225, 227, 1)'];
 
       const datasets = [{
-        label: 'Sumber',
+        label: 'Sisa Dana',
         data: totalDanaState.sisaToCharts,
         backgroundColor: colors.slice(0, totalDanaState.sisaToCharts.length),
       }];
@@ -87,11 +87,11 @@ console.log(getTotalDetail);
                 <h1 className="text-4xl">{process.env.DESA}</h1>        
                 <h1 className="text-2xl">Kecamatan {process.env.KECAMATAN}</h1>        
                 <h1 className="text-2xl">Kabupaten {process.env.KAB}</h1>        
-                <h3 className='font-bold mt-4'>Grafik sisa Dana menurut sumber Pendapatan</h3>
+                <h3 className='mt-4 font-bold'>Grafik sisa Dana menurut sumber Pendapatan</h3>
                 <Bar options={options} data={data2} />
             </div>
             <div className="w-2/5">
-              <h3 className='font-bold mb-2'>Grafik penggunaan Dana menurut Bidang</h3>
+              <h3 className='mb-2 font-bold'>Grafik penggunaan Dana menurut Bidang</h3>
               <Doughnut data={data} />
             </div>
         </div>
