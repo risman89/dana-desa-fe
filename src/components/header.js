@@ -26,8 +26,6 @@ const Header = () => {
     })
 
 console.log(getTotalDetail);
-const sumber = totalDanaState.totalOthers.map((t, i) => ({sumber : t.sumber}))
-
     const data = {
         labels: getBidang,
         datasets: [
